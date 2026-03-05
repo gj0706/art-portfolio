@@ -20,8 +20,8 @@ export default async function BlogPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Blog</h1>
-        <p className="text-gray-500">
+        <h1 className="text-3xl font-bold text-foreground mb-2">Blog</h1>
+        <p className="text-muted-foreground">
           Thoughts, reflections, and stories about the creative process.
         </p>
       </div>
@@ -42,7 +42,7 @@ export default async function BlogPage() {
                 />
               </div>
             )}
-            <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground/70 mb-2">
               <time>{post.published_at ? formatDate(post.published_at) : formatDate(post.created_at)}</time>
               {post.tags?.length > 0 && (
                 <>
@@ -51,18 +51,18 @@ export default async function BlogPage() {
                 </>
               )}
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+            <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
               {post.title}
             </h2>
             {post.excerpt && (
-              <p className="text-gray-500 line-clamp-2">{post.excerpt}</p>
+              <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
             )}
           </Link>
         ))}
       </div>
 
       {(!posts || posts.length === 0) && (
-        <p className="text-center text-gray-400 py-20">
+        <p className="text-center text-muted-foreground/70 py-20">
           No blog posts yet. Check back soon!
         </p>
       )}

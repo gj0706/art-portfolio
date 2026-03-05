@@ -36,11 +36,11 @@ function LoginForm() {
   }
 
   return (
-    <div className="w-full max-w-sm p-8 bg-white rounded-xl shadow-sm border">
+    <div className="w-full max-w-sm p-8 bg-card rounded-xl shadow-sm border">
       <div className="text-center mb-6">
-        <Palette className="h-10 w-10 mx-auto text-gray-800 mb-2" />
-        <h1 className="text-xl font-semibold text-gray-900">Admin Login</h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <Palette className="h-10 w-10 mx-auto text-foreground mb-2" />
+        <h1 className="text-xl font-semibold text-foreground">Admin Login</h1>
+        <p className="text-sm text-muted-foreground mt-1">
           Sign in to manage the portfolio
         </p>
       </div>
@@ -49,7 +49,7 @@ function LoginForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-foreground/80 mb-1"
           >
             Email
           </label>
@@ -59,7 +59,7 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring"
             placeholder="admin@example.com"
           />
         </div>
@@ -67,7 +67,7 @@ function LoginForm() {
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-foreground/80 mb-1"
           >
             Password
           </label>
@@ -77,7 +77,7 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring"
             placeholder="••••••••"
           />
         </div>
@@ -91,7 +91,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"
+          className="w-full py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>
@@ -102,7 +102,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-muted">
       <Suspense>
         <LoginForm />
       </Suspense>

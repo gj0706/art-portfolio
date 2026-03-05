@@ -35,18 +35,18 @@ export default async function HomePage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="relative bg-gradient-to-b from-purple-50 to-white py-20 px-4 sm:px-6">
+        <section className="relative bg-gradient-to-b from-secondary/20 to-white py-20 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border mb-6">
-              <Palette className="h-4 w-4 text-purple-500" />
-              <span className="text-sm text-gray-600">
+            <div className="inline-flex items-center gap-2 bg-card px-4 py-2 rounded-full shadow-sm border mb-6">
+              <Palette className="h-4 w-4 text-secondary" />
+              <span className="text-sm text-muted-foreground">
                 Drawing my world since age 2
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
               Anna&apos;s Art Portfolio
             </h1>
-            <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               A creative journey from first scribbles to detailed illustrations,
               animations, and beyond. Explore years of artistic growth and
               discovery.
@@ -54,13 +54,13 @@ export default async function HomePage() {
             <div className="flex gap-3 justify-center">
               <Link
                 href="/gallery"
-                className="px-6 py-3 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                className="px-6 py-3 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
               >
                 Explore Gallery
               </Link>
               <Link
                 href="/about"
-                className="px-6 py-3 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                className="px-6 py-3 border border-border text-foreground/80 text-sm font-medium rounded-lg hover:bg-muted transition-colors"
               >
                 About the Artist
               </Link>
@@ -72,10 +72,10 @@ export default async function HomePage() {
         {featuredArtworks.length > 0 && (
           <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">Featured</h2>
+              <h2 className="text-2xl font-bold text-foreground">Featured</h2>
               <Link
                 href="/gallery"
-                className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
               >
                 View all <ArrowRight className="h-4 w-4" />
               </Link>
@@ -92,12 +92,12 @@ export default async function HomePage() {
         {recentArtworks.length > 0 && (
           <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 border-t">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-foreground">
                 Recent Works
               </h2>
               <Link
                 href="/gallery"
-                className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
               >
                 View all <ArrowRight className="h-4 w-4" />
               </Link>
@@ -113,7 +113,7 @@ export default async function HomePage() {
         {/* CTA when empty */}
         {featuredArtworks.length === 0 && recentArtworks.length === 0 && (
           <section className="max-w-4xl mx-auto px-4 sm:px-6 py-20 text-center">
-            <p className="text-gray-400 text-lg mb-4">
+            <p className="text-muted-foreground/70 text-lg mb-4">
               The gallery is being prepared. Check back soon!
             </p>
           </section>

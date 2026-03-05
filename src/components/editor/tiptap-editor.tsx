@@ -110,8 +110,8 @@ export function TipTapEditor({
       onClick={onClick}
       title={title}
       className={cn(
-        "p-1.5 rounded hover:bg-gray-200 transition-colors",
-        isActive && "bg-gray-200 text-blue-600"
+        "p-1.5 rounded hover:bg-muted transition-colors",
+        isActive && "bg-muted text-primary"
       )}
     >
       {children}
@@ -121,9 +121,9 @@ export function TipTapEditor({
   const iconSize = "h-4 w-4";
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden">
+    <div className="border border-border rounded-lg overflow-hidden">
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-0.5 p-2 border-b bg-gray-50">
+      <div className="flex flex-wrap gap-0.5 p-2 border-b bg-muted">
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive("bold")}
@@ -153,7 +153,7 @@ export function TipTapEditor({
           <Strikethrough className={iconSize} />
         </ToolbarButton>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         <ToolbarButton
           onClick={() =>
@@ -183,7 +183,7 @@ export function TipTapEditor({
           <Heading3 className={iconSize} />
         </ToolbarButton>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -214,7 +214,7 @@ export function TipTapEditor({
           <Code className={iconSize} />
         </ToolbarButton>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
@@ -238,7 +238,7 @@ export function TipTapEditor({
           <AlignRight className={iconSize} />
         </ToolbarButton>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         <ToolbarButton onClick={addImage} title="Insert Image">
           <ImageIcon className={iconSize} />
@@ -250,7 +250,7 @@ export function TipTapEditor({
           <YoutubeIcon className={iconSize} />
         </ToolbarButton>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}

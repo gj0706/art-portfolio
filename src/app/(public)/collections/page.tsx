@@ -19,8 +19,8 @@ export default async function CollectionsPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Collections</h1>
-        <p className="text-gray-500">
+        <h1 className="text-3xl font-bold text-foreground mb-2">Collections</h1>
+        <p className="text-muted-foreground">
           Curated groups of artwork organized by theme, age, and medium.
         </p>
       </div>
@@ -36,7 +36,7 @@ export default async function CollectionsPage() {
             <Link
               key={collection.id}
               href={`/collections/${collection.slug}`}
-              className="group block rounded-xl overflow-hidden border bg-white hover:shadow-lg transition-shadow"
+              className="group block rounded-xl overflow-hidden border bg-card hover:shadow-lg transition-shadow"
             >
               {collection.cover_image_url ? (
                 <div className="aspect-[3/2] overflow-hidden">
@@ -47,17 +47,17 @@ export default async function CollectionsPage() {
                   />
                 </div>
               ) : (
-                <div className="aspect-[3/2] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <span className="text-4xl text-gray-300">
+                <div className="aspect-[3/2] bg-gradient-to-br from-muted to-muted flex items-center justify-center">
+                  <span className="text-4xl text-muted-foreground/70">
                     {collection.title.charAt(0)}
                   </span>
                 </div>
               )}
               <div className="p-4">
-                <h2 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h2 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                   {collection.title}
                 </h2>
-                <div className="flex items-center gap-2 mt-1 text-sm text-gray-500">
+                <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
                   {typeLabel && <span>{typeLabel}</span>}
                   <span>&middot;</span>
                   <span>
@@ -65,7 +65,7 @@ export default async function CollectionsPage() {
                   </span>
                 </div>
                 {collection.description && (
-                  <p className="text-sm text-gray-400 mt-2 line-clamp-2">
+                  <p className="text-sm text-muted-foreground/70 mt-2 line-clamp-2">
                     {collection.description}
                   </p>
                 )}
@@ -76,7 +76,7 @@ export default async function CollectionsPage() {
       </div>
 
       {(!collections || collections.length === 0) && (
-        <p className="text-center text-gray-400 py-20">
+        <p className="text-center text-muted-foreground/70 py-20">
           No collections yet.
         </p>
       )}

@@ -54,7 +54,7 @@ export default async function BlogPostPage({
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <Link
         href="/blog"
-        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
         All Posts
@@ -70,7 +70,7 @@ export default async function BlogPostPage({
 
       <article>
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-3">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground/70 mb-3">
             <time>
               {post.published_at
                 ? formatDate(post.published_at)
@@ -82,7 +82,7 @@ export default async function BlogPostPage({
                 {post.tags.map((tag: string) => (
                   <span
                     key={tag}
-                    className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs"
+                    className="bg-muted text-muted-foreground px-2 py-0.5 rounded-full text-xs"
                   >
                     {tag}
                   </span>
@@ -90,7 +90,7 @@ export default async function BlogPostPage({
               </>
             )}
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">{post.title}</h1>
+          <h1 className="text-3xl font-bold text-foreground">{post.title}</h1>
         </div>
 
         {sanitizedHtml ? (
@@ -99,13 +99,13 @@ export default async function BlogPostPage({
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         ) : (
-          <p className="text-gray-400 italic">No content yet.</p>
+          <p className="text-muted-foreground/70 italic">No content yet.</p>
         )}
       </article>
 
       {/* Comments */}
       <div className="border-t pt-8 mt-12 space-y-6">
-        <h2 className="text-xl font-semibold text-gray-900">Comments</h2>
+        <h2 className="text-xl font-semibold text-foreground">Comments</h2>
         <CommentList commentableType="blog_post" commentableId={post.id} />
         <CommentForm commentableType="blog_post" commentableId={post.id} />
       </div>

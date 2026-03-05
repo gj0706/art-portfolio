@@ -19,7 +19,7 @@ export default async function EditBlogPostPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit Blog Post</h1>
+      <h1 className="text-2xl font-bold text-foreground mb-6">Edit Blog Post</h1>
       <BlogPostForm post={post} />
     </div>
   );

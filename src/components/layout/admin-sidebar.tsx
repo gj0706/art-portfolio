@@ -40,9 +40,9 @@ export function AdminSidebar() {
   }
 
   return (
-    <aside className="w-60 bg-gray-900 text-gray-300 flex flex-col min-h-screen">
-      <div className="p-4 border-b border-gray-800">
-        <Link href="/" className="flex items-center gap-2 text-white">
+    <aside className="w-60 bg-primary text-primary-foreground/70 flex flex-col min-h-screen">
+      <div className="p-4 border-b border-primary-foreground/20">
+        <Link href="/" className="flex items-center gap-2 text-primary-foreground">
           <Palette className="h-6 w-6" />
           <span className="font-semibold">Art Portfolio</span>
         </Link>
@@ -60,8 +60,8 @@ export function AdminSidebar() {
               className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                 isActive
-                  ? "bg-gray-800 text-white"
-                  : "hover:bg-gray-800 hover:text-white"
+                  ? "bg-primary/80 text-primary-foreground"
+                  : "hover:bg-primary/80 hover:text-primary-foreground"
               )}
             >
               <item.icon className="h-4 w-4" />
@@ -71,10 +71,10 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="p-3 border-t border-gray-800">
+      <div className="p-3 border-t border-primary-foreground/20">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-gray-800 transition-colors w-full"
+          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground hover:bg-primary/80 transition-colors w-full"
         >
           <LogOut className="h-4 w-4" />
           Sign out

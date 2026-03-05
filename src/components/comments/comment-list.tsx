@@ -22,7 +22,7 @@ export async function CommentList({
 
   if (!comments || comments.length === 0) {
     return (
-      <p className="text-sm text-gray-400 italic">
+      <p className="text-sm text-muted-foreground/70 italic">
         No comments yet. Be the first to share your thoughts!
       </p>
     );
@@ -31,16 +31,16 @@ export async function CommentList({
   return (
     <div className="space-y-4">
       {(comments as Comment[]).map((comment) => (
-        <div key={comment.id} className="p-4 bg-gray-50 rounded-lg">
+        <div key={comment.id} className="p-4 bg-muted rounded-lg">
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-medium text-gray-900 text-sm">
+            <span className="font-medium text-foreground text-sm">
               {comment.author_name}
             </span>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-muted-foreground/70">
               {formatRelativeDate(comment.created_at)}
             </span>
           </div>
-          <p className="text-sm text-gray-600 whitespace-pre-wrap">
+          <p className="text-sm text-muted-foreground whitespace-pre-wrap">
             {comment.content}
           </p>
         </div>

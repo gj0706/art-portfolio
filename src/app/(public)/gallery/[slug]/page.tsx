@@ -63,7 +63,7 @@ export default async function ArtworkDetailPage({
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <Link
         href="/gallery"
-        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Gallery
@@ -75,7 +75,7 @@ export default async function ArtworkDetailPage({
           media.media_type === "video" || media.video_embed_url ? (
             <div
               key={media.id}
-              className="aspect-video rounded-xl overflow-hidden bg-gray-100"
+              className="aspect-video rounded-xl overflow-hidden bg-muted"
             >
               <iframe
                 src={media.video_embed_url || media.url}
@@ -97,11 +97,11 @@ export default async function ArtworkDetailPage({
 
       {/* Info */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">
+        <h1 className="text-3xl font-bold text-foreground mb-3">
           {typedArtwork.title}
         </h1>
 
-        <div className="flex flex-wrap gap-3 text-sm text-gray-500 mb-4">
+        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mb-4">
           {mediumLabel && <span>{mediumLabel}</span>}
           {typedArtwork.year_created && (
             <span>{typedArtwork.year_created}</span>
@@ -118,7 +118,7 @@ export default async function ArtworkDetailPage({
               <Link
                 key={tag}
                 href={`/gallery?tag=${tag}`}
-                className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full hover:bg-gray-200 transition-colors"
+                className="text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-full hover:bg-muted transition-colors"
               >
                 {tag}
               </Link>
@@ -127,17 +127,17 @@ export default async function ArtworkDetailPage({
         )}
 
         {typedArtwork.description && (
-          <p className="text-gray-600 leading-relaxed">
+          <p className="text-muted-foreground leading-relaxed">
             {typedArtwork.description}
           </p>
         )}
 
         {typedArtwork.story && (
-          <div className="mt-6 p-4 bg-amber-50 border border-amber-100 rounded-xl">
-            <h2 className="text-sm font-semibold text-amber-800 mb-2">
+          <div className="mt-6 p-4 bg-secondary/10 border border-secondary/30 rounded-xl">
+            <h2 className="text-sm font-semibold text-foreground mb-2">
               Behind the Scenes
             </h2>
-            <p className="text-sm text-amber-700 leading-relaxed">
+            <p className="text-sm text-foreground/80 leading-relaxed">
               {typedArtwork.story}
             </p>
           </div>
@@ -146,7 +146,7 @@ export default async function ArtworkDetailPage({
 
       {/* Comments */}
       <div className="border-t pt-8 space-y-6">
-        <h2 className="text-xl font-semibold text-gray-900">Comments</h2>
+        <h2 className="text-xl font-semibold text-foreground">Comments</h2>
         <CommentList
           commentableType="artwork"
           commentableId={typedArtwork.id}

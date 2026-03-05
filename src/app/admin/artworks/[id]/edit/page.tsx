@@ -11,16 +11,20 @@ export default async function EditArtworkPage({
   const supabase = await createClient();
   const { data: artwork } = await supabase
     .from("artworks")
-    .select("*, artwork_media(*)")
+    .select("*, artwork_media(*), artwork_collections(collection_id)")
     .eq("id", id)
     .single();
+  const { data: collections } = await supabase
+    .from("collections")
+    .select("id, title")
+    .order("title", { ascending: true });
 
   if (!artwork) notFound();
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Edit Artwork</h1>
-      <ArtworkForm artwork={artwork} />
+      <h1 className="text-2xl font-bold text-foreground mb-6">Edit Artwork</h1>
+      <ArtworkForm artwork={artwork} collections={collections || []} />
     </div>
   );
 }

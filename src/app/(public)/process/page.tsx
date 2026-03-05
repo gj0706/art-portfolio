@@ -27,8 +27,8 @@ export default async function ProcessPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Process</h1>
-        <p className="text-gray-500">
+        <h1 className="text-3xl font-bold text-foreground mb-2">Process</h1>
+        <p className="text-muted-foreground">
           Behind the scenes: sketches, iterations, and the story behind each
           piece.
         </p>
@@ -36,16 +36,16 @@ export default async function ProcessPage() {
 
       <div className="space-y-12">
         {processArtworks.map((artwork) => (
-          <div key={artwork.id} className="border rounded-xl p-6 bg-white">
+          <div key={artwork.id} className="border rounded-xl p-6 bg-card">
             <Link
               href={`/gallery/${artwork.slug}`}
-              className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors"
+              className="text-xl font-semibold text-foreground hover:text-primary transition-colors"
             >
               {artwork.title}
             </Link>
 
             {artwork.story && (
-              <p className="text-sm text-gray-600 mt-3 leading-relaxed">
+              <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                 {artwork.story}
               </p>
             )}
@@ -66,7 +66,7 @@ export default async function ProcessPage() {
                         loading="lazy"
                       />
                       {media.caption && (
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-muted-foreground mt-1">
                           {media.caption}
                         </p>
                       )}
@@ -79,7 +79,7 @@ export default async function ProcessPage() {
       </div>
 
       {processArtworks.length === 0 && (
-        <p className="text-center text-gray-400 py-20">
+        <p className="text-center text-muted-foreground/70 py-20">
           Process content coming soon! Check back later for behind-the-scenes
           looks at the creative journey.
         </p>

@@ -39,23 +39,23 @@ export default async function AboutPage() {
             className="w-32 h-32 rounded-full object-cover mx-auto mb-4"
           />
         ) : (
-          <div className="w-32 h-32 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center mx-auto mb-4">
-            <Palette className="h-12 w-12 text-purple-400" />
+          <div className="w-32 h-32 rounded-full bg-gradient-to-br from-secondary/20 to-pink-100 flex items-center justify-center mx-auto mb-4">
+            <Palette className="h-12 w-12 text-secondary" />
           </div>
         )}
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">{artistName}</h1>
-        <p className="text-gray-500">Drawing my world since age 2</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">{artistName}</h1>
+        <p className="text-muted-foreground">Drawing my world since age 2</p>
       </div>
 
       {bio ? (
         <div className="prose prose-gray max-w-none">
-          <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">
+          <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
             {bio}
           </p>
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-400">
+          <p className="text-muted-foreground/70">
             About page coming soon. Check back later!
           </p>
         </div>
@@ -63,7 +63,7 @@ export default async function AboutPage() {
 
       {/* Timeline placeholder */}
       <div className="mt-12 border-t pt-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        <h2 className="text-xl font-semibold text-foreground mb-6">
           Art Journey
         </h2>
         <div className="space-y-6">
@@ -86,10 +86,10 @@ export default async function AboutPage() {
             },
           ].map((milestone) => (
             <div key={milestone.age} className="flex gap-4">
-              <div className="shrink-0 w-28 text-sm font-medium text-gray-900">
+              <div className="shrink-0 w-28 text-sm font-medium text-foreground">
                 {milestone.age}
               </div>
-              <div className="text-sm text-gray-500">{milestone.desc}</div>
+              <div className="text-sm text-muted-foreground">{milestone.desc}</div>
             </div>
           ))}
         </div>

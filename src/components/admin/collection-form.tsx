@@ -65,32 +65,32 @@ export function CollectionForm({ collection }: CollectionFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+        <label className="block text-sm font-medium text-foreground/80 mb-1">Title *</label>
         <input
           type="text"
           value={title}
           onChange={(e) => handleTitleChange(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
+        <label className="block text-sm font-medium text-foreground/80 mb-1">Slug</label>
         <input
           type="text"
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Type *</label>
+        <label className="block text-sm font-medium text-foreground/80 mb-1">Type *</label>
         <select
           value={collectionType}
           onChange={(e) => setCollectionType(e.target.value as typeof collectionType)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         >
           {COLLECTION_TYPES.map((t) => (
             <option key={t.value} value={t.value}>{t.label}</option>
@@ -99,34 +99,34 @@ export function CollectionForm({ collection }: CollectionFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <label className="block text-sm font-medium text-foreground/80 mb-1">Description</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image URL</label>
+        <label className="block text-sm font-medium text-foreground/80 mb-1">Cover Image URL</label>
         <input
           type="text"
           value={coverImageUrl}
           onChange={(e) => setCoverImageUrl(e.target.value)}
           placeholder="https://..."
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       <div className="flex items-center gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1">Sort Order</label>
           <input
             type="number"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
-            className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-24 px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
         <label className="flex items-center gap-2 mt-5">
@@ -134,9 +134,9 @@ export function CollectionForm({ collection }: CollectionFormProps) {
             type="checkbox"
             checked={isVisible}
             onChange={(e) => setIsVisible(e.target.checked)}
-            className="h-4 w-4 rounded border-gray-300"
+            className="h-4 w-4 rounded border-border"
           />
-          <span className="text-sm text-gray-700">Visible</span>
+          <span className="text-sm text-foreground/80">Visible</span>
         </label>
       </div>
 
@@ -148,14 +148,14 @@ export function CollectionForm({ collection }: CollectionFormProps) {
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"
+          className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
         >
           {saving ? "Saving..." : collection ? "Update Collection" : "Create Collection"}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-2.5 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+          className="px-6 py-2.5 border border-border text-foreground/80 text-sm font-medium rounded-lg hover:bg-muted transition-colors"
         >
           Cancel
         </button>

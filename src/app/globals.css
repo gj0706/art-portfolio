@@ -2,26 +2,88 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 0.5rem;
+  --background: oklch(0.965 0.002 228.775);
+  --foreground: oklch(0.133 0.013 225.315);
+  --muted: oklch(0.939 0.008 230.78);
+  --muted-foreground: oklch(0.512 0.014 231.054);
+  --popover: oklch(0.993 0.002 230.686);
+  --popover-foreground: oklch(0.133 0.013 225.315);
+  --card: oklch(0.993 0.002 230.686);
+  --card-foreground: oklch(0.133 0.013 225.315);
+  --border: oklch(0.932 0.005 230.739);
+  --input: oklch(0.932 0.005 230.739);
+  --primary: oklch(0.288 0.065 239.149);
+  --primary-foreground: oklch(0.991 0 172.405);
+  --secondary: oklch(0.84 0.147 80.45);
+  --secondary-foreground: oklch(0.066 0 230.171);
+  --accent: oklch(0.939 0.006 230.74);
+  --accent-foreground: oklch(0.407 0.013 231.142);
+  --destructive: oklch(0.568 0.208 27.061);
+  --destructive-foreground: oklch(1 0 180);
+  --ring: oklch(0.288 0.065 239.149);
+  --chart-1: oklch(0.288 0.065 239.149);
+  --chart-2: oklch(0.939 0.006 230.74);
+  --chart-3: oklch(0.939 0.006 230.74);
+  --chart-4: oklch(0.962 0.003 230.708);
+  --chart-5: oklch(0.289 0.067 239.364);
+}
+
+.dark {
+  --radius: 0.5rem;
+  --background: oklch(0.116 0.012 224.329);
+  --foreground: oklch(0.985 0.002 230.689);
+  --muted: oklch(0.195 0.012 231.67);
+  --muted-foreground: oklch(0.684 0.013 230.928);
+  --popover: oklch(0.116 0.012 224.329);
+  --popover-foreground: oklch(0.985 0.002 230.689);
+  --card: oklch(0.116 0.012 224.329);
+  --card-foreground: oklch(0.985 0.002 230.689);
+  --border: oklch(0.26 0.011 231.336);
+  --input: oklch(0.26 0.011 231.336);
+  --primary: oklch(0.288 0.065 239.149);
+  --primary-foreground: oklch(0.964 0.009 230.79);
+  --secondary: oklch(0.271 0.009 231.135);
+  --secondary-foreground: oklch(0.963 0.009 232.368);
+  --accent: oklch(0.271 0.009 231.135);
+  --accent-foreground: oklch(0.963 0.009 232.368);
+  --destructive: oklch(0.568 0.208 27.061);
+  --destructive-foreground: oklch(1 0 180);
+  --ring: oklch(0.288 0.065 239.149);
+  --chart-1: oklch(0.288 0.065 239.149);
+  --chart-2: oklch(0.271 0.009 231.135);
+  --chart-3: oklch(0.271 0.009 231.135);
+  --chart-4: oklch(0.302 0.01 231.16);
+  --chart-5: oklch(0.289 0.067 239.364);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --font-sans: var(--font-inter);
+  --radius: var(--radius);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
 }

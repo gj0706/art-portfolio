@@ -79,7 +79,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
         {/* Main content */}
         <div className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Title *
             </label>
             <input
@@ -87,12 +87,12 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
               value={title}
               onChange={(e) => handleTitleChange(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Content
             </label>
             <TipTapEditor
@@ -109,25 +109,25 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
         {/* Sidebar */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Slug
             </label>
             <input
               type="text"
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Status
             </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value as typeof status)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             >
               <option value="draft">Draft</option>
               <option value="published">Published</option>
@@ -136,7 +136,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Excerpt
             </label>
             <textarea
@@ -144,13 +144,13 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
               onChange={(e) => setExcerpt(e.target.value)}
               rows={3}
               maxLength={500}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               placeholder="Brief summary..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Cover Image URL
             </label>
             <input
@@ -158,12 +158,12 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
               value={coverImageUrl}
               onChange={(e) => setCoverImageUrl(e.target.value)}
               placeholder="https://..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               Tags (comma-separated)
             </label>
             <input
@@ -171,7 +171,7 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
               value={tags}
               onChange={(e) => setTags(e.target.value)}
               placeholder="art, process, reflection"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
@@ -185,14 +185,14 @@ export function BlogPostForm({ post }: BlogPostFormProps) {
             <button
               type="submit"
               disabled={saving}
-              className="flex-1 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"
+              className="flex-1 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
             >
               {saving ? "Saving..." : post ? "Update" : "Create"}
             </button>
             <button
               type="button"
               onClick={() => router.back()}
-              className="px-4 py-2.5 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+              className="px-4 py-2.5 border border-border text-foreground/80 text-sm font-medium rounded-lg hover:bg-muted transition-colors"
             >
               Cancel
             </button>

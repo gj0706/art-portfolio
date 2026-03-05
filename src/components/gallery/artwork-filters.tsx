@@ -31,7 +31,7 @@ export function ArtworkFilters() {
       <select
         value={currentMedium}
         onChange={(e) => updateFilter("medium", e.target.value)}
-        className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-3 py-2 border border-input rounded-lg text-sm bg-card focus:outline-none focus:ring-2 focus:ring-ring"
       >
         <option value="">All Mediums</option>
         {ARTWORK_MEDIUMS.map((m) => (
@@ -44,7 +44,7 @@ export function ArtworkFilters() {
       <select
         value={currentYear}
         onChange={(e) => updateFilter("year", e.target.value)}
-        className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-3 py-2 border border-input rounded-lg text-sm bg-card focus:outline-none focus:ring-2 focus:ring-ring"
       >
         <option value="">All Years</option>
         {years.map((y) => (
@@ -57,7 +57,7 @@ export function ArtworkFilters() {
       {(currentMedium || currentYear) && (
         <button
           onClick={() => router.push("/gallery")}
-          className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 underline"
+          className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground underline"
         >
           Clear filters
         </button>

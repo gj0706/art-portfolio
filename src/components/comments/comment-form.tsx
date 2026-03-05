@@ -59,7 +59,7 @@ export function CommentForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">Leave a Comment</h3>
+      <h3 className="text-lg font-semibold text-foreground">Leave a Comment</h3>
 
       {/* Honeypot - hidden from users */}
       <input
@@ -72,7 +72,7 @@ export function CommentForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-foreground/80 mb-1">
             Name *
           </label>
           <input
@@ -81,25 +81,25 @@ export function CommentForm({
             onChange={(e) => setName(e.target.value)}
             required
             maxLength={100}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-foreground/80 mb-1">
             Email (optional)
           </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             placeholder="Not displayed publicly"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-foreground/80 mb-1">
           Comment *
         </label>
         <textarea
@@ -108,9 +108,9 @@ export function CommentForm({
           required
           maxLength={2000}
           rows={4}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="text-xs text-muted-foreground/70 mt-1">
           {content.length}/2000 characters
         </p>
       </div>
@@ -122,7 +122,7 @@ export function CommentForm({
       <button
         type="submit"
         disabled={submitting}
-        className="px-5 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"
+        className="px-5 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
       >
         {submitting ? "Submitting..." : "Submit Comment"}
       </button>

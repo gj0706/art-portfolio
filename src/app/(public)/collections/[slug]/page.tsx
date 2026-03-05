@@ -70,18 +70,18 @@ export default async function CollectionDetailPage({
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <Link
         href="/collections"
-        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
         All Collections
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-foreground mb-2">
           {collection.title}
         </h1>
         {collection.description && (
-          <p className="text-gray-500">{collection.description}</p>
+          <p className="text-muted-foreground">{collection.description}</p>
         )}
       </div>
 

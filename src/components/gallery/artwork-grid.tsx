@@ -9,7 +9,7 @@ export function ArtworkGrid({ artworks }: ArtworkGridProps) {
   if (artworks.length === 0) {
     return (
       <div className="py-20 text-center">
-        <p className="text-gray-400 text-lg">No artworks to display yet.</p>
+        <p className="text-muted-foreground/70 text-lg">No artworks to display yet.</p>
       </div>
     );
   }

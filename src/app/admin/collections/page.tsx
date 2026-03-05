@@ -15,26 +15,26 @@ export default async function AdminCollectionsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Collections</h1>
+        <h1 className="text-2xl font-bold text-foreground">Collections</h1>
         <Link
           href="/admin/collections/new"
-          className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
         >
           <Plus className="h-4 w-4" />
           Add Collection
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl border overflow-hidden">
+      <div className="bg-card rounded-xl border overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50 border-b">
+          <thead className="bg-muted border-b">
             <tr>
-              <th className="text-left px-4 py-3 font-medium text-gray-500">Collection</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-500">Type</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-500">Artworks</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-500">Visible</th>
-              <th className="text-left px-4 py-3 font-medium text-gray-500">Created</th>
-              <th className="text-right px-4 py-3 font-medium text-gray-500">Actions</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Collection</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Type</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Artworks</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Visible</th>
+              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Created</th>
+              <th className="text-right px-4 py-3 font-medium text-muted-foreground">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -43,7 +43,7 @@ export default async function AdminCollectionsPage() {
                 (t) => t.value === collection.collection_type
               )?.label;
               return (
-                <tr key={collection.id} className="hover:bg-gray-50">
+                <tr key={collection.id} className="hover:bg-muted">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       {collection.cover_image_url ? (
@@ -53,15 +53,15 @@ export default async function AdminCollectionsPage() {
                           className="h-10 w-10 rounded object-cover"
                         />
                       ) : (
-                        <div className="h-10 w-10 rounded bg-gray-200" />
+                        <div className="h-10 w-10 rounded bg-muted" />
                       )}
-                      <span className="font-medium text-gray-900">
+                      <span className="font-medium text-foreground">
                         {collection.title}
                       </span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{typeLabel}</td>
-                  <td className="px-4 py-3 text-gray-600">
+                  <td className="px-4 py-3 text-muted-foreground">{typeLabel}</td>
+                  <td className="px-4 py-3 text-muted-foreground">
                     {collection.artwork_collections?.length || 0}
                   </td>
                   <td className="px-4 py-3">
@@ -69,20 +69,20 @@ export default async function AdminCollectionsPage() {
                       className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${
                         collection.is_visible
                           ? "bg-green-100 text-green-700"
-                          : "bg-gray-100 text-gray-600"
+                          : "bg-muted text-muted-foreground"
                       }`}
                     >
                       {collection.is_visible ? "Visible" : "Hidden"}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-gray-500">
+                  <td className="px-4 py-3 text-muted-foreground">
                     {formatDate(collection.created_at)}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link
                         href={`/admin/collections/${collection.id}/edit`}
-                        className="p-1.5 text-gray-400 hover:text-gray-600"
+                        className="p-1.5 text-muted-foreground/70 hover:text-muted-foreground"
                       >
                         <Pencil className="h-4 w-4" />
                       </Link>
@@ -94,7 +94,7 @@ export default async function AdminCollectionsPage() {
                       >
                         <button
                           type="submit"
-                          className="p-1.5 text-gray-400 hover:text-red-600"
+                          className="p-1.5 text-muted-foreground/70 hover:text-red-600"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -106,7 +106,7 @@ export default async function AdminCollectionsPage() {
             })}
             {(!collections || collections.length === 0) && (
               <tr>
-                <td colSpan={6} className="px-4 py-12 text-center text-gray-400">
+                <td colSpan={6} className="px-4 py-12 text-center text-muted-foreground/70">
                   No collections yet.
                 </td>
               </tr>

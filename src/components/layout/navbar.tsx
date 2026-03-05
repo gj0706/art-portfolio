@@ -20,10 +20,10 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b">
+    <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-gray-900">
+          <Link href="/" className="flex items-center gap-2 font-semibold text-foreground">
             <Palette className="h-5 w-5" />
             <span>Anna&apos;s Art Portfolio</span>
           </Link>
@@ -37,8 +37,8 @@ export function Navbar() {
                 className={cn(
                   "px-3 py-2 rounded-lg text-sm transition-colors",
                   pathname.startsWith(link.href)
-                    ? "text-gray-900 bg-gray-100 font-medium"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    ? "text-foreground bg-muted font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
               >
                 {link.label}
@@ -48,7 +48,7 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 text-gray-600"
+            className="md:hidden p-2 text-muted-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -66,8 +66,8 @@ export function Navbar() {
                 className={cn(
                   "block px-3 py-2 rounded-lg text-sm transition-colors",
                   pathname.startsWith(link.href)
-                    ? "text-gray-900 bg-gray-100 font-medium"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                    ? "text-foreground bg-muted font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
               >
                 {link.label}

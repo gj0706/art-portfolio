@@ -17,6 +17,10 @@ export async function createArtwork(formData: FormData) {
     ? (formData.get("tags") as string).split(",").map((t) => t.trim()).filter(Boolean)
     : [];
   const isFeatured = formData.get("is_featured") === "true";
+  const collectionIds = formData
+    .getAll("collection_ids")
+    .map((id) => String(id))
+    .filter(Boolean);
 
   const parsed = artworkSchema.safeParse({ ...raw, tags, is_featured: isFeatured });
   if (!parsed.success) {
@@ -31,8 +35,23 @@ export async function createArtwork(formData: FormData) {
 
   if (error) return { error: { _form: [error.message] } };
 
+  if (collectionIds.length > 0) {
+    const { error: collectionError } = await supabase
+      .from("artwork_collections")
+      .insert(
+        collectionIds.map((collectionId) => ({
+          artwork_id: data.id,
+          collection_id: collectionId,
+        }))
+      );
+
+    if (collectionError) return { error: { _form: [collectionError.message] } };
+  }
+
   revalidatePath("/admin/artworks");
+  revalidatePath("/admin/collections");
   revalidatePath("/gallery");
+  revalidatePath("/collections");
   return { id: data.id };
 }
 
@@ -48,6 +67,10 @@ export async function updateArtwork(id: string, formData: FormData) {
     ? (formData.get("tags") as string).split(",").map((t) => t.trim()).filter(Boolean)
     : [];
   const isFeatured = formData.get("is_featured") === "true";
+  const collectionIds = formData
+    .getAll("collection_ids")
+    .map((collectionId) => String(collectionId))
+    .filter(Boolean);
 
   const parsed = artworkSchema.safeParse({ ...raw, tags, is_featured: isFeatured });
   if (!parsed.success) {
@@ -61,8 +84,30 @@ export async function updateArtwork(id: string, formData: FormData) {
 
   if (error) return { error: { _form: [error.message] } };
 
+  const { error: removeCollectionsError } = await supabase
+    .from("artwork_collections")
+    .delete()
+    .eq("artwork_id", id);
+  if (removeCollectionsError) {
+    return { error: { _form: [removeCollectionsError.message] } };
+  }
+
+  if (collectionIds.length > 0) {
+    const { error: addCollectionsError } = await supabase
+      .from("artwork_collections")
+      .insert(
+        collectionIds.map((collectionId) => ({
+          artwork_id: id,
+          collection_id: collectionId,
+        }))
+      );
+    if (addCollectionsError) return { error: { _form: [addCollectionsError.message] } };
+  }
+
   revalidatePath("/admin/artworks");
+  revalidatePath("/admin/collections");
   revalidatePath("/gallery");
+  revalidatePath("/collections");
   revalidatePath(`/gallery/${parsed.data.slug}`);
   return { success: true };
 }

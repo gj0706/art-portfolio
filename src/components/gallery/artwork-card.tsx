@@ -20,7 +20,7 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
     <Link
       href={`/gallery/${artwork.slug}`}
       className={cn(
-        "group block break-inside-avoid mb-4 rounded-xl overflow-hidden bg-white border hover:shadow-lg transition-shadow",
+        "group block break-inside-avoid mb-4 rounded-xl overflow-hidden bg-card border hover:shadow-lg transition-shadow",
         className
       )}
     >
@@ -35,20 +35,20 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
         </div>
       )}
       <div className="p-3">
-        <h3 className="font-medium text-gray-900 text-sm group-hover:text-blue-600 transition-colors">
+        <h3 className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">
           {artwork.title}
         </h3>
         <div className="flex items-center gap-2 mt-1">
           {mediumLabel && (
-            <span className="text-xs text-gray-500">{mediumLabel}</span>
+            <span className="text-xs text-muted-foreground">{mediumLabel}</span>
           )}
           {artwork.age_created && (
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-muted-foreground/70">
               Age {artwork.age_created}
             </span>
           )}
           {artwork.year_created && (
-            <span className="text-xs text-gray-400">{artwork.year_created}</span>
+            <span className="text-xs text-muted-foreground/70">{artwork.year_created}</span>
           )}
         </div>
       </div>

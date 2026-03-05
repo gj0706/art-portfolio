@@ -61,21 +61,21 @@ export function Dropzone({
         className={cn(
           "border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors",
           isDragActive
-            ? "border-blue-500 bg-blue-50"
-            : "border-gray-300 hover:border-gray-400",
+            ? "border-ring bg-muted"
+            : "border-border hover:border-border",
           isUploading && "opacity-50 cursor-not-allowed"
         )}
       >
         <input {...getInputProps()} />
-        <Upload className="mx-auto h-10 w-10 text-gray-400 mb-3" />
+        <Upload className="mx-auto h-10 w-10 text-muted-foreground/70 mb-3" />
         {isDragActive ? (
-          <p className="text-blue-600 font-medium">Drop files here...</p>
+          <p className="text-primary font-medium">Drop files here...</p>
         ) : (
           <>
-            <p className="text-gray-600 font-medium">
+            <p className="text-muted-foreground font-medium">
               Drag & drop files here, or click to browse
             </p>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-muted-foreground/70 mt-1">
               Images (JPG, PNG, GIF, WebP, SVG) and videos (MP4, WebM, MOV)
             </p>
           </>
@@ -87,7 +87,7 @@ export function Dropzone({
           {uploadEntries.map(([id, upload]) => (
             <div
               key={id}
-              className="flex items-center gap-3 p-2 bg-gray-50 rounded"
+              className="flex items-center gap-3 p-2 bg-muted rounded"
             >
               {upload.status === "complete" && (
                 <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />
@@ -96,17 +96,17 @@ export function Dropzone({
                 <AlertCircle className="h-4 w-4 text-red-500 shrink-0" />
               )}
               {upload.status === "uploading" && (
-                <div className="h-4 w-4 shrink-0 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                <div className="h-4 w-4 shrink-0 border-2 border-ring border-t-transparent rounded-full animate-spin" />
               )}
 
-              <span className="text-sm text-gray-700 truncate flex-1">
+              <span className="text-sm text-foreground/80 truncate flex-1">
                 {upload.filename}
               </span>
 
               {upload.status === "uploading" && (
-                <div className="w-24 bg-gray-200 rounded-full h-2">
+                <div className="w-24 bg-muted rounded-full h-2">
                   <div
-                    className="bg-blue-500 h-2 rounded-full transition-all"
+                    className="bg-primary h-2 rounded-full transition-all"
                     style={{ width: `${upload.progress}%` }}
                   />
                 </div>

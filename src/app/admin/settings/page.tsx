@@ -60,12 +60,12 @@ export default function AdminSettingsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Site Settings</h1>
+      <h1 className="text-2xl font-bold text-foreground mb-6">Site Settings</h1>
 
-      <div className="bg-white rounded-xl border p-6 max-w-2xl space-y-6">
+      <div className="bg-card rounded-xl border p-6 max-w-2xl space-y-6">
         {fields.map((field) => (
           <div key={field.key}>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-foreground/80 mb-1">
               {field.label}
             </label>
             {field.type === "textarea" ? (
@@ -73,14 +73,14 @@ export default function AdminSettingsPage() {
                 value={settings[field.key] || ""}
                 onChange={(e) => updateSetting(field.key, e.target.value)}
                 rows={5}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               />
             ) : (
               <input
                 type={field.type}
                 value={settings[field.key] || ""}
                 onChange={(e) => updateSetting(field.key, e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               />
             )}
           </div>
@@ -90,7 +90,7 @@ export default function AdminSettingsPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="px-6 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 disabled:opacity-50 transition-colors"
+            className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
           >
             {saving ? "Saving..." : "Save Settings"}
           </button>

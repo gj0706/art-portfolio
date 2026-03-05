@@ -57,7 +57,7 @@ export default async function WritingDetailPage({
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <Link
         href="/writing"
-        className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
         All Writing
@@ -65,14 +65,14 @@ export default async function WritingDetailPage({
 
       <article>
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-gray-400 mb-3">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground/70 mb-3">
             {typeLabel && (
-              <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs">
+              <span className="bg-muted text-muted-foreground px-2 py-0.5 rounded-full text-xs">
                 {typeLabel}
               </span>
             )}
             {piece.published_externally && piece.publication_name && (
-              <span className="flex items-center gap-1 text-xs text-blue-600">
+              <span className="flex items-center gap-1 text-xs text-primary">
                 <ExternalLink className="h-3 w-3" />
                 Published in {piece.publication_name}
               </span>
@@ -83,7 +83,7 @@ export default async function WritingDetailPage({
                 : formatDate(piece.created_at)}
             </time>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">{piece.title}</h1>
+          <h1 className="text-3xl font-bold text-foreground">{piece.title}</h1>
         </div>
 
         {sanitizedHtml ? (
@@ -92,7 +92,7 @@ export default async function WritingDetailPage({
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         ) : (
-          <p className="text-gray-400 italic">No content yet.</p>
+          <p className="text-muted-foreground/70 italic">No content yet.</p>
         )}
       </article>
     </div>
