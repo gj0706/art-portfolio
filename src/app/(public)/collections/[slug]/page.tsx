@@ -23,7 +23,7 @@ export async function generateMetadata({
   if (!data) return { title: "Collection Not Found" };
 
   return {
-    title: `${data.title} | Art Portfolio`,
+    title: `${data.title} | Anna's Art Adventure`,
     description: data.description || `View the "${data.title}" collection`,
   };
 }
@@ -77,7 +77,7 @@ export default async function CollectionDetailPage({
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">
+        <h1 className="font-serif text-3xl font-normal text-foreground mb-2">
           {collection.title}
         </h1>
         {collection.description && (

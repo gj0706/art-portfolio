@@ -5,7 +5,7 @@ import type { ArtworkWithMedia } from "@/types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gallery | Art Portfolio",
+  title: "Gallery | Anna's Art Adventure",
   description: "Browse the complete art collection from age 2 to today.",
 };
 
@@ -39,7 +39,7 @@ export default async function GalleryPage({
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Gallery</h1>
+        <h1 className="font-serif text-3xl font-normal text-foreground mb-2">Gallery</h1>
         <p className="text-muted-foreground">
           A collection of artwork from age 2 to today.
         </p>

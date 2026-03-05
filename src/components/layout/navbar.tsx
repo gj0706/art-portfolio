@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Palette, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
   { href: "/gallery", label: "Gallery" },
@@ -20,16 +21,15 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-foreground">
-            <Palette className="h-5 w-5" />
-            <span>Anna&apos;s Art Portfolio</span>
+          <Link href="/" className="font-serif text-lg text-foreground tracking-tight">
+            Anna&apos;s Art Adventure
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -37,8 +37,8 @@ export function Navbar() {
                 className={cn(
                   "px-3 py-2 rounded-lg text-sm transition-colors",
                   pathname.startsWith(link.href)
-                    ? "text-foreground bg-muted font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}
@@ -46,18 +46,23 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Mobile toggle */}
-          <button
-            className="md:hidden p-2 text-muted-foreground"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          {/* Theme toggle + Mobile toggle */}
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              className="md:hidden p-2 text-muted-foreground"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-expanded={mobileOpen}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile nav */}
         {mobileOpen && (
-          <nav className="md:hidden pb-4 space-y-1">
+          <nav aria-label="Mobile navigation" className="md:hidden pb-4 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -66,8 +71,8 @@ export function Navbar() {
                 className={cn(
                   "block px-3 py-2 rounded-lg text-sm transition-colors",
                   pathname.startsWith(link.href)
-                    ? "text-foreground bg-muted font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}

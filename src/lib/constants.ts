@@ -1,5 +1,5 @@
 export const SITE_CONFIG = {
-  name: "Art Portfolio",
+  name: "Anna's Art Adventure",
   description: "A journey through art from age 2 to today",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 } as const;

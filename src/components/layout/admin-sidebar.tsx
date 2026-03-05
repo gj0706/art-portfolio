@@ -44,7 +44,7 @@ export function AdminSidebar() {
       <div className="p-4 border-b border-primary-foreground/20">
         <Link href="/" className="flex items-center gap-2 text-primary-foreground">
           <Palette className="h-6 w-6" />
-          <span className="font-semibold">Art Portfolio</span>
+          <span className="font-semibold">Anna&apos;s Art Adventure</span>
         </Link>
       </div>
 

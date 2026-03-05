@@ -6,7 +6,7 @@ import { ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Writing | Art Portfolio",
+  title: "Writing | Anna's Art Adventure",
   description: "Poems, reflections, essays, and stories.",
 };
 
@@ -22,7 +22,7 @@ export default async function WritingPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Writing</h1>
+        <h1 className="font-serif text-3xl font-normal text-foreground mb-2">Writing</h1>
         <p className="text-muted-foreground">Poems, reflections, essays, and stories.</p>
       </div>
 
@@ -36,7 +36,7 @@ export default async function WritingPage() {
             <Link
               key={piece.id}
               href={`/writing/${piece.slug}`}
-              className="group block p-5 bg-card rounded-xl border hover:shadow-md transition-shadow"
+              className="group block p-5 bg-card/50 backdrop-blur-sm rounded-2xl hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>

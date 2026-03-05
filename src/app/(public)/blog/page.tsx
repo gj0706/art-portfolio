@@ -1,10 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import Image from "next/image";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Art Portfolio",
+  title: "Blog | Anna's Art Adventure",
   description: "Thoughts, reflections, and stories about the creative process.",
 };
 
@@ -20,7 +21,7 @@ export default async function BlogPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Blog</h1>
+        <h1 className="font-serif text-3xl font-normal text-foreground mb-2">Blog</h1>
         <p className="text-muted-foreground">
           Thoughts, reflections, and stories about the creative process.
         </p>
@@ -34,11 +35,13 @@ export default async function BlogPage() {
             className="group block"
           >
             {post.cover_image_url && (
-              <div className="aspect-[2/1] rounded-xl overflow-hidden mb-4">
-                <img
+              <div className="aspect-[2/1] rounded-xl overflow-hidden mb-4 relative">
+                <Image
                   src={post.cover_image_url}
                   alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                 />
               </div>
             )}

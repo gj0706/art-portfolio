@@ -99,5 +99,6 @@ export async function moderateComment(
   revalidatePath("/admin/comments");
   revalidatePath("/gallery");
   revalidatePath("/blog");
+  revalidatePath("/writing");
   return { success: true };
 }

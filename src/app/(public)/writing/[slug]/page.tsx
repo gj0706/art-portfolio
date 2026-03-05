@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { WRITING_TYPES } from "@/lib/constants";
+import { CommentForm } from "@/components/comments/comment-form";
+import { CommentList } from "@/components/comments/comment-list";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
@@ -24,7 +26,7 @@ export async function generateMetadata({
   if (!data) return { title: "Writing Not Found" };
 
   return {
-    title: `${data.title} | Art Portfolio`,
+    title: `${data.title} | Anna's Art Adventure`,
     description: data.excerpt || `Read "${data.title}"`,
   };
 }
@@ -83,18 +85,25 @@ export default async function WritingDetailPage({
                 : formatDate(piece.created_at)}
             </time>
           </div>
-          <h1 className="text-3xl font-bold text-foreground">{piece.title}</h1>
+          <h1 className="font-serif text-3xl font-normal text-foreground">{piece.title}</h1>
         </div>
 
         {sanitizedHtml ? (
           <div
-            className="prose prose-gray max-w-none"
+            className="prose prose-gray dark:prose-invert max-w-none"
             dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
           />
         ) : (
           <p className="text-muted-foreground/70 italic">No content yet.</p>
         )}
       </article>
+
+      {/* Comments */}
+      <div className="pt-8 mt-12 space-y-6">
+        <h2 className="text-xl font-semibold text-foreground">Comments</h2>
+        <CommentList commentableType="writing" commentableId={piece.id} />
+        <CommentForm commentableType="writing" commentableId={piece.id} />
+      </div>
     </div>
   );
 }

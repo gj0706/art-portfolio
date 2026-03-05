@@ -1,10 +1,11 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import Image from "next/image";
 import { COLLECTION_TYPES } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Collections | Art Portfolio",
+  title: "Collections | Anna's Art Adventure",
   description: "Browse curated collections of artwork organized by theme, age, and medium.",
 };
 
@@ -19,7 +20,7 @@ export default async function CollectionsPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Collections</h1>
+        <h1 className="font-serif text-3xl font-normal text-foreground mb-2">Collections</h1>
         <p className="text-muted-foreground">
           Curated groups of artwork organized by theme, age, and medium.
         </p>
@@ -36,14 +37,16 @@ export default async function CollectionsPage() {
             <Link
               key={collection.id}
               href={`/collections/${collection.slug}`}
-              className="group block rounded-xl overflow-hidden border bg-card hover:shadow-lg transition-shadow"
+              className="group block rounded-2xl overflow-hidden bg-card/50 backdrop-blur-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
             >
               {collection.cover_image_url ? (
-                <div className="aspect-[3/2] overflow-hidden">
-                  <img
+                <div className="aspect-[3/2] overflow-hidden relative">
+                  <Image
                     src={collection.cover_image_url}
                     alt={collection.title}
-                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
                   />
                 </div>
               ) : (
