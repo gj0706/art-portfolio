@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { submitComment } from "@/actions/comments";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 interface CommentFormProps {
   commentableType: "artwork" | "blog_post" | "writing";
@@ -51,7 +55,7 @@ export function CommentForm({
 
   if (submitted) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-sm text-green-700">
+      <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg p-4 text-sm text-green-700 dark:text-green-400">
         Thank you for your comment! It will appear after approval.
       </div>
     );
@@ -71,44 +75,35 @@ export function CommentForm({
       />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Name *
-          </label>
-          <input
+        <div className="space-y-2">
+          <Label>Name *</Label>
+          <Input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
             maxLength={100}
-            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Email (optional)
-          </label>
-          <input
+        <div className="space-y-2">
+          <Label>Email (optional)</Label>
+          <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             placeholder="Not displayed publicly"
           />
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Comment *
-        </label>
-        <textarea
+      <div className="space-y-2">
+        <Label>Comment *</Label>
+        <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
           maxLength={2000}
           rows={4}
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <p className="text-xs text-muted-foreground/70 mt-1">
           {content.length}/2000 characters
@@ -116,16 +111,12 @@ export function CommentForm({
       </div>
 
       {error && (
-        <p className="text-sm text-red-600 bg-red-50 p-2 rounded">{error}</p>
+        <p className="text-sm text-destructive bg-red-50 dark:bg-red-950/30 p-2 rounded">{error}</p>
       )}
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="px-5 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
-      >
+      <Button type="submit" disabled={submitting}>
         {submitting ? "Submitting..." : "Submit Comment"}
-      </button>
+      </Button>
     </form>
   );
 }

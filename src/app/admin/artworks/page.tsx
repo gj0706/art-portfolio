@@ -5,6 +5,16 @@ import { formatDate } from "@/lib/utils";
 import { deleteArtwork } from "@/actions/artworks";
 import { ARTWORK_MEDIUMS } from "@/lib/constants";
 import type { Artwork, ArtworkMedia } from "@/types";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 
 export default async function AdminArtworksPage() {
   const supabase = await createClient();
@@ -17,40 +27,27 @@ export default async function AdminArtworksPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-foreground">Artworks</h1>
-        <Link
-          href="/admin/artworks/new"
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
-        >
-          <Plus className="h-4 w-4" />
-          Add Artwork
-        </Link>
+        <Button asChild>
+          <Link href="/admin/artworks/new">
+            <Plus className="h-4 w-4" />
+            Add Artwork
+          </Link>
+        </Button>
       </div>
 
       <div className="bg-card rounded-xl border overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-muted border-b">
-            <tr>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">
-                Artwork
-              </th>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">
-                Medium
-              </th>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">
-                Year
-              </th>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">
-                Status
-              </th>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">
-                Created
-              </th>
-              <th className="text-right px-4 py-3 font-medium text-muted-foreground">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
+        <Table>
+          <TableHeader className="bg-muted">
+            <TableRow>
+              <TableHead className="px-4">Artwork</TableHead>
+              <TableHead className="px-4">Medium</TableHead>
+              <TableHead className="px-4">Year</TableHead>
+              <TableHead className="px-4">Status</TableHead>
+              <TableHead className="px-4">Created</TableHead>
+              <TableHead className="px-4 text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {(artworks as (Artwork & { artwork_media: ArtworkMedia[] })[] | null)?.map(
               (artwork) => {
                 const primaryImage = artwork.artwork_media?.find(
@@ -61,8 +58,8 @@ export default async function AdminArtworksPage() {
                 )?.label;
 
                 return (
-                  <tr key={artwork.id} className="hover:bg-muted">
-                    <td className="px-4 py-3">
+                  <TableRow key={artwork.id}>
+                    <TableCell className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         {primaryImage ? (
                           <img
@@ -84,68 +81,74 @@ export default async function AdminArtworksPage() {
                           )}
                         </div>
                       </div>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-muted-foreground">
                       {mediumLabel || artwork.medium}
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-muted-foreground">
                       {artwork.year_created || "-"}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${
+                    </TableCell>
+                    <TableCell className="px-4 py-3">
+                      <Badge
+                        variant={
                           artwork.status === "published"
-                            ? "bg-green-100 text-green-700"
+                            ? "default"
                             : artwork.status === "draft"
-                            ? "bg-muted text-muted-foreground"
-                            : "bg-red-100 text-red-700"
-                        }`}
+                            ? "secondary"
+                            : "destructive"
+                        }
+                        className={
+                          artwork.status === "published"
+                            ? "bg-green-100 text-green-700 hover:bg-green-100"
+                            : undefined
+                        }
                       >
                         {artwork.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-muted-foreground">
                       {formatDate(artwork.created_at)}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Link
-                          href={`/admin/artworks/${artwork.id}/edit`}
-                          className="p-1.5 text-muted-foreground/70 hover:text-muted-foreground rounded"
-                        >
-                          <Pencil className="h-4 w-4" />
-                        </Link>
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        <Button variant="ghost" size="icon" asChild>
+                          <Link href={`/admin/artworks/${artwork.id}/edit`}>
+                            <Pencil className="h-4 w-4" />
+                          </Link>
+                        </Button>
                         <form
                           action={async () => {
                             "use server";
                             await deleteArtwork(artwork.id);
                           }}
                         >
-                          <button
+                          <Button
                             type="submit"
-                            className="p-1.5 text-muted-foreground/70 hover:text-red-600 rounded"
+                            variant="ghost"
+                            size="icon"
+                            className="text-muted-foreground hover:text-red-600"
                           >
                             <Trash2 className="h-4 w-4" />
-                          </button>
+                          </Button>
                         </form>
                       </div>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 );
               }
             )}
             {(!artworks || artworks.length === 0) && (
-              <tr>
-                <td
+              <TableRow>
+                <TableCell
                   colSpan={6}
                   className="px-4 py-12 text-center text-muted-foreground/70"
                 >
-                  No artworks yet. Click "Add Artwork" to get started.
-                </td>
-              </tr>
+                  No artworks yet. Click &quot;Add Artwork&quot; to get started.
+                </TableCell>
+              </TableRow>
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

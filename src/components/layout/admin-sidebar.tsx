@@ -16,6 +16,7 @@ import {
   Palette,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const navItems = [
   { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
@@ -58,10 +59,10 @@ export function AdminSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
                 isActive
-                  ? "bg-primary/80 text-primary-foreground"
-                  : "hover:bg-primary/80 hover:text-primary-foreground"
+                  ? "bg-primary-foreground/15 text-primary-foreground font-medium"
+                  : "hover:bg-primary-foreground/10 hover:text-primary-foreground"
               )}
             >
               <item.icon className="h-4 w-4" />
@@ -72,13 +73,14 @@ export function AdminSidebar() {
       </nav>
 
       <div className="p-3 border-t border-primary-foreground/20">
-        <button
+        <Button
+          variant="ghost"
           onClick={handleLogout}
-          className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-primary-foreground/50 hover:text-primary-foreground hover:bg-primary/80 transition-colors w-full"
+          className="w-full justify-start gap-3 px-3 text-primary-foreground/50 hover:text-primary-foreground hover:bg-primary-foreground/10"
         >
           <LogOut className="h-4 w-4" />
           Sign out
-        </button>
+        </Button>
       </div>
     </aside>
   );

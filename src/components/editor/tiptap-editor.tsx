@@ -34,6 +34,7 @@ import {
   Redo,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface TipTapEditorProps {
   content?: JSONContent;
@@ -94,176 +95,192 @@ export function TipTapEditor({
     }
   }
 
-  const ToolbarButton = ({
-    onClick,
-    isActive = false,
-    children,
-    title,
-  }: {
-    onClick: () => void;
-    isActive?: boolean;
-    children: React.ReactNode;
-    title: string;
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      title={title}
-      className={cn(
-        "p-1.5 rounded hover:bg-muted transition-colors",
-        isActive && "bg-muted text-primary"
-      )}
-    >
-      {children}
-    </button>
-  );
-
-  const iconSize = "h-4 w-4";
-
   return (
     <div className="border border-border rounded-lg overflow-hidden">
       {/* Toolbar */}
       <div className="flex flex-wrap gap-0.5 p-2 border-b bg-muted">
-        <ToolbarButton
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          isActive={editor.isActive("bold")}
+          className={cn(editor.isActive("bold") && "bg-accent text-primary")}
           title="Bold"
         >
-          <Bold className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <Bold />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          isActive={editor.isActive("italic")}
+          className={cn(editor.isActive("italic") && "bg-accent text-primary")}
           title="Italic"
         >
-          <Italic className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <Italic />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          isActive={editor.isActive("underline")}
+          className={cn(editor.isActive("underline") && "bg-accent text-primary")}
           title="Underline"
         >
-          <UnderlineIcon className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <UnderlineIcon />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleStrike().run()}
-          isActive={editor.isActive("strike")}
+          className={cn(editor.isActive("strike") && "bg-accent text-primary")}
           title="Strikethrough"
         >
-          <Strikethrough className={iconSize} />
-        </ToolbarButton>
+          <Strikethrough />
+        </Button>
 
         <div className="w-px bg-border mx-1" />
 
-        <ToolbarButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          isActive={editor.isActive("heading", { level: 1 })}
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+          className={cn(editor.isActive("heading", { level: 1 }) && "bg-accent text-primary")}
           title="Heading 1"
         >
-          <Heading1 className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          isActive={editor.isActive("heading", { level: 2 })}
+          <Heading1 />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+          className={cn(editor.isActive("heading", { level: 2 }) && "bg-accent text-primary")}
           title="Heading 2"
         >
-          <Heading2 className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          isActive={editor.isActive("heading", { level: 3 })}
+          <Heading2 />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
+          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+          className={cn(editor.isActive("heading", { level: 3 }) && "bg-accent text-primary")}
           title="Heading 3"
         >
-          <Heading3 className={iconSize} />
-        </ToolbarButton>
+          <Heading3 />
+        </Button>
 
         <div className="w-px bg-border mx-1" />
 
-        <ToolbarButton
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          isActive={editor.isActive("bulletList")}
+          className={cn(editor.isActive("bulletList") && "bg-accent text-primary")}
           title="Bullet List"
         >
-          <List className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <List />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          isActive={editor.isActive("orderedList")}
+          className={cn(editor.isActive("orderedList") && "bg-accent text-primary")}
           title="Ordered List"
         >
-          <ListOrdered className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <ListOrdered />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          isActive={editor.isActive("blockquote")}
+          className={cn(editor.isActive("blockquote") && "bg-accent text-primary")}
           title="Quote"
         >
-          <Quote className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <Quote />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          isActive={editor.isActive("codeBlock")}
+          className={cn(editor.isActive("codeBlock") && "bg-accent text-primary")}
           title="Code Block"
         >
-          <Code className={iconSize} />
-        </ToolbarButton>
+          <Code />
+        </Button>
 
         <div className="w-px bg-border mx-1" />
 
-        <ToolbarButton
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
-          isActive={editor.isActive({ textAlign: "left" })}
+          className={cn(editor.isActive({ textAlign: "left" }) && "bg-accent text-primary")}
           title="Align Left"
         >
-          <AlignLeft className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <AlignLeft />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
-          isActive={editor.isActive({ textAlign: "center" })}
+          className={cn(editor.isActive({ textAlign: "center" }) && "bg-accent text-primary")}
           title="Align Center"
         >
-          <AlignCenter className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <AlignCenter />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
-          isActive={editor.isActive({ textAlign: "right" })}
+          className={cn(editor.isActive({ textAlign: "right" }) && "bg-accent text-primary")}
           title="Align Right"
         >
-          <AlignRight className={iconSize} />
-        </ToolbarButton>
+          <AlignRight />
+        </Button>
 
         <div className="w-px bg-border mx-1" />
 
-        <ToolbarButton onClick={addImage} title="Insert Image">
-          <ImageIcon className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton onClick={addLink} title="Insert Link">
-          <LinkIcon className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton onClick={addYoutube} title="Insert YouTube Video">
-          <YoutubeIcon className={iconSize} />
-        </ToolbarButton>
+        <Button type="button" variant="ghost" size="icon-xs" onClick={addImage} title="Insert Image">
+          <ImageIcon />
+        </Button>
+        <Button type="button" variant="ghost" size="icon-xs" onClick={addLink} title="Insert Link">
+          <LinkIcon />
+        </Button>
+        <Button type="button" variant="ghost" size="icon-xs" onClick={addYoutube} title="Insert YouTube Video">
+          <YoutubeIcon />
+        </Button>
 
         <div className="w-px bg-border mx-1" />
 
-        <ToolbarButton
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().undo().run()}
           title="Undo"
         >
-          <Undo className={iconSize} />
-        </ToolbarButton>
-        <ToolbarButton
+          <Undo />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => editor.chain().focus().redo().run()}
           title="Redo"
         >
-          <Redo className={iconSize} />
-        </ToolbarButton>
+          <Redo />
+        </Button>
       </div>
 
       {/* Editor */}

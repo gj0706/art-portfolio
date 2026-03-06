@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { formatDate } from "@/lib/utils";
 import { Image as ImageIcon, Film, FileImage } from "lucide-react";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export default async function AdminUploadsPage() {
   const supabase = await createClient();
@@ -49,9 +50,9 @@ export default async function AdminUploadsPage() {
                     </div>
                   )}
                   {item.is_primary && (
-                    <span className="absolute top-1.5 left-1.5 text-[10px] bg-primary text-primary-foreground px-1.5 py-0.5 rounded font-medium">
+                    <Badge className="absolute top-1.5 left-1.5 text-[10px] px-1.5 py-0.5">
                       Primary
-                    </span>
+                    </Badge>
                   )}
                 </div>
 
@@ -65,7 +66,9 @@ export default async function AdminUploadsPage() {
                     {artwork.title}
                   </Link>
                   <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-                    <span className="capitalize">{item.media_type}</span>
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 capitalize">
+                      {item.media_type}
+                    </Badge>
                     <span>{formatDate(item.created_at)}</span>
                   </div>
                   {item.file_size && (
@@ -77,7 +80,7 @@ export default async function AdminUploadsPage() {
                   )}
                   {item.width && item.height && (
                     <p className="text-[11px] text-muted-foreground/70">
-                      {item.width} × {item.height}
+                      {item.width} x {item.height}
                     </p>
                   )}
                 </div>

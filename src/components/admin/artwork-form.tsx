@@ -8,6 +8,12 @@ import { ARTWORK_MEDIUMS } from "@/lib/constants";
 import { generateSlug } from "@/lib/utils";
 import type { Artwork, ArtworkMedia } from "@/types";
 import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface ArtworkFormProps {
   artwork?: Artwork & {
@@ -115,190 +121,158 @@ export function ArtworkForm({ artwork, collections }: ArtworkFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       {/* Title */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Title *
-        </label>
-        <input
+      <div className="space-y-2">
+        <Label>Title *</Label>
+        <Input
           type="text"
           value={title}
           onChange={(e) => handleTitleChange(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
         {errors.title && (
-          <p className="mt-1 text-sm text-red-600">{errors.title[0]}</p>
+          <p className="text-sm text-destructive">{errors.title[0]}</p>
         )}
       </div>
 
       {/* Slug */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Slug
-        </label>
-        <input
+      <div className="space-y-2">
+        <Label>Slug</Label>
+        <Input
           type="text"
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       {/* Medium + Year + Age Row */}
       <div className="grid grid-cols-3 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Medium *
-          </label>
-          <select
-            value={medium}
-            onChange={(e) => setMedium(e.target.value as typeof medium)}
-            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            {ARTWORK_MEDIUMS.map((m) => (
-              <option key={m.value} value={m.value}>
-                {m.label}
-              </option>
-            ))}
-          </select>
+        <div className="space-y-2">
+          <Label>Medium *</Label>
+          <Select value={medium} onValueChange={(value) => setMedium(value as typeof medium)}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {ARTWORK_MEDIUMS.map((m) => (
+                <SelectItem key={m.value} value={m.value}>
+                  {m.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Year Created
-          </label>
-          <input
+        <div className="space-y-2">
+          <Label>Year Created</Label>
+          <Input
             type="number"
             value={yearCreated}
             onChange={(e) => setYearCreated(e.target.value)}
             min="2000"
             max="2040"
-            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Age When Created
-          </label>
-          <input
+        <div className="space-y-2">
+          <Label>Age When Created</Label>
+          <Input
             type="number"
             value={ageCreated}
             onChange={(e) => setAgeCreated(e.target.value)}
             min="0"
             max="25"
-            className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
       </div>
 
       {/* Description */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Description
-        </label>
-        <textarea
+      <div className="space-y-2">
+        <Label>Description</Label>
+        <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       {/* Dimensions */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Dimensions
-        </label>
-        <input
+      <div className="space-y-2">
+        <Label>Dimensions</Label>
+        <Input
           type="text"
           value={dimensions}
           onChange={(e) => setDimensions(e.target.value)}
           placeholder='e.g., 8x10 inches'
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       {/* Tags */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Tags (comma-separated)
-        </label>
-        <input
+      <div className="space-y-2">
+        <Label>Tags (comma-separated)</Label>
+        <Input
           type="text"
           value={tags}
           onChange={(e) => setTags(e.target.value)}
           placeholder="portrait, landscape, abstract"
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       {/* Story */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">
-          Behind the Scenes Story
-        </label>
-        <textarea
+      <div className="space-y-2">
+        <Label>Behind the Scenes Story</Label>
+        <Textarea
           value={story}
           onChange={(e) => setStory(e.target.value)}
           rows={4}
           placeholder="Share the story behind this artwork..."
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       {/* Status + Featured */}
       <div className="flex items-center gap-6">
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Status
-          </label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value as typeof status)}
-            className="px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-            <option value="archived">Archived</option>
-          </select>
+        <div className="space-y-2">
+          <Label>Status</Label>
+          <Select value={status} onValueChange={(value) => setStatus(value as typeof status)}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="draft">Draft</SelectItem>
+              <SelectItem value="published">Published</SelectItem>
+              <SelectItem value="archived">Archived</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <label className="flex items-center gap-2 mt-5">
-          <input
-            type="checkbox"
+        <div className="flex items-center gap-2 mt-5">
+          <Checkbox
             checked={isFeatured}
-            onChange={(e) => setIsFeatured(e.target.checked)}
-            className="h-4 w-4 rounded border-border"
+            onCheckedChange={(checked) => setIsFeatured(checked === true)}
           />
-          <span className="text-sm text-foreground/80">Featured</span>
-        </label>
+          <Label className="font-normal">Featured</Label>
+        </div>
       </div>
 
       {/* Collections */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-2">
-          Collections
-        </label>
+      <div className="space-y-2">
+        <Label>Collections</Label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {collections.map((collection) => {
             const checked = selectedCollectionIds.includes(collection.id);
             return (
-              <label
+              <div
                 key={collection.id}
                 className="flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm text-foreground/80"
               >
-                <input
-                  type="checkbox"
+                <Checkbox
                   checked={checked}
-                  onChange={(e) => {
+                  onCheckedChange={(checkedState) => {
                     setSelectedCollectionIds((prev) =>
-                      e.target.checked
+                      checkedState === true
                         ? [...prev, collection.id]
                         : prev.filter((id) => id !== collection.id)
                     );
                   }}
-                  className="h-4 w-4 rounded border-border"
                 />
-                <span>{collection.title}</span>
-              </label>
+                <Label className="font-normal">{collection.title}</Label>
+              </div>
             );
           })}
         </div>
@@ -306,10 +280,8 @@ export function ArtworkForm({ artwork, collections }: ArtworkFormProps) {
 
       {/* Existing Media */}
       {artwork?.artwork_media && artwork.artwork_media.length > 0 && (
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-2">
-            Current Media
-          </label>
+        <div className="space-y-2">
+          <Label>Current Media</Label>
           <div className="grid grid-cols-4 gap-3">
             {artwork.artwork_media.map((m) => (
               <div key={m.id} className="relative group">
@@ -330,10 +302,8 @@ export function ArtworkForm({ artwork, collections }: ArtworkFormProps) {
       )}
 
       {/* Upload New Media */}
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-2">
-          Upload Media
-        </label>
+      <div className="space-y-2">
+        <Label>Upload Media</Label>
         <Dropzone
           folder="artworks"
           onUploadComplete={(result) => {
@@ -366,31 +336,27 @@ export function ArtworkForm({ artwork, collections }: ArtworkFormProps) {
 
       {/* Errors */}
       {errors._form && (
-        <p className="text-sm text-red-600 bg-red-50 p-3 rounded">
+        <p className="text-sm text-destructive bg-red-50 p-3 rounded">
           {errors._form[0]}
         </p>
       )}
 
       {/* Submit */}
       <div className="flex gap-3">
-        <button
-          type="submit"
-          disabled={saving}
-          className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
-        >
+        <Button type="submit" disabled={saving}>
           {saving
             ? "Saving..."
             : artwork
             ? "Update Artwork"
             : "Create Artwork"}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="outline"
           onClick={() => router.back()}
-          className="px-6 py-2.5 border border-border text-foreground/80 text-sm font-medium rounded-lg hover:bg-muted transition-colors"
         >
           Cancel
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -9,6 +9,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { ImageProtection } from "@/components/ui/image-protection";
+import { VideoProtection } from "@/components/ui/video-protection";
 import type { ArtworkWithMedia } from "@/types";
 import type { Metadata } from "next";
 
@@ -111,19 +112,30 @@ export default async function ArtworkDetailPage({
       {/* Images */}
       <div className="space-y-4 mb-8">
         {sortedMedia.map((media) =>
-          media.media_type === "video" || media.video_embed_url ? (
+          media.video_embed_url ? (
+            // External embed (YouTube, Vimeo, etc.)
             <div
               key={media.id}
               className="aspect-video rounded-2xl overflow-hidden bg-muted"
             >
               <iframe
-                src={media.video_embed_url || media.url}
+                src={media.video_embed_url}
                 className="w-full h-full"
                 allowFullScreen
                 title={media.caption || typedArtwork.title}
               />
             </div>
+          ) : media.media_type === "video" ? (
+            // Self-hosted video with download prevention
+            <VideoProtection
+              key={media.id}
+              src={media.url}
+              poster={media.thumbnail_url}
+              title={media.caption || typedArtwork.title}
+              className="rounded-2xl"
+            />
           ) : (
+            // Image with protection + watermark
             <ImageProtection key={media.id} className="rounded-2xl">
               <Image
                 src={media.url}

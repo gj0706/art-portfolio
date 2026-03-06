@@ -2,6 +2,14 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { ARTWORK_MEDIUMS } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function ArtworkFilters() {
   const router = useRouter();
@@ -11,7 +19,7 @@ export function ArtworkFilters() {
 
   function updateFilter(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
-    if (value) {
+    if (value && value !== "all") {
       params.set(key, value);
     } else {
       params.delete(key);
@@ -28,39 +36,48 @@ export function ArtworkFilters() {
 
   return (
     <div className="flex flex-wrap gap-3 mb-6">
-      <select
-        value={currentMedium}
-        onChange={(e) => updateFilter("medium", e.target.value)}
-        className="px-3 py-2 border border-input rounded-lg text-sm bg-card focus:outline-none focus:ring-2 focus:ring-ring"
+      <Select
+        value={currentMedium || "all"}
+        onValueChange={(value) => updateFilter("medium", value)}
       >
-        <option value="">All Mediums</option>
-        {ARTWORK_MEDIUMS.map((m) => (
-          <option key={m.value} value={m.value}>
-            {m.label}
-          </option>
-        ))}
-      </select>
+        <SelectTrigger className="w-[160px]">
+          <SelectValue placeholder="All Mediums" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Mediums</SelectItem>
+          {ARTWORK_MEDIUMS.map((m) => (
+            <SelectItem key={m.value} value={m.value}>
+              {m.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-      <select
-        value={currentYear}
-        onChange={(e) => updateFilter("year", e.target.value)}
-        className="px-3 py-2 border border-input rounded-lg text-sm bg-card focus:outline-none focus:ring-2 focus:ring-ring"
+      <Select
+        value={currentYear || "all"}
+        onValueChange={(value) => updateFilter("year", value)}
       >
-        <option value="">All Years</option>
-        {years.map((y) => (
-          <option key={y} value={y}>
-            {y}
-          </option>
-        ))}
-      </select>
+        <SelectTrigger className="w-[130px]">
+          <SelectValue placeholder="All Years" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Years</SelectItem>
+          {years.map((y) => (
+            <SelectItem key={y} value={String(y)}>
+              {y}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       {(currentMedium || currentYear) && (
-        <button
+        <Button
+          variant="link"
           onClick={() => router.push("/gallery")}
-          className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground underline"
+          className="text-muted-foreground"
         >
           Clear filters
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -6,6 +6,18 @@ import { createCollection, updateCollection } from "@/actions/collections";
 import { COLLECTION_TYPES } from "@/lib/constants";
 import { generateSlug } from "@/lib/utils";
 import type { Collection } from "@/types";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface CollectionFormProps {
   collection?: Collection;
@@ -64,101 +76,102 @@ export function CollectionForm({ collection }: CollectionFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">Title *</label>
-        <input
+      <div className="space-y-2">
+        <Label>Title *</Label>
+        <Input
           type="text"
           value={title}
           onChange={(e) => handleTitleChange(e.target.value)}
           required
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">Slug</label>
-        <input
+      <div className="space-y-2">
+        <Label>Slug</Label>
+        <Input
           type="text"
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">Type *</label>
-        <select
+      <div className="space-y-2">
+        <Label>Type *</Label>
+        <Select
           value={collectionType}
-          onChange={(e) => setCollectionType(e.target.value as typeof collectionType)}
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+          onValueChange={(value) => setCollectionType(value as typeof collectionType)}
         >
-          {COLLECTION_TYPES.map((t) => (
-            <option key={t.value} value={t.value}>{t.label}</option>
-          ))}
-        </select>
+          <SelectTrigger className="w-full">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {COLLECTION_TYPES.map((t) => (
+              <SelectItem key={t.value} value={t.value}>
+                {t.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">Description</label>
-        <textarea
+      <div className="space-y-2">
+        <Label>Description</Label>
+        <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-foreground/80 mb-1">Cover Image URL</label>
-        <input
+      <div className="space-y-2">
+        <Label>Cover Image URL</Label>
+        <Input
           type="text"
           value={coverImageUrl}
           onChange={(e) => setCoverImageUrl(e.target.value)}
           placeholder="https://..."
-          className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
 
       <div className="flex items-center gap-6">
-        <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1">Sort Order</label>
-          <input
+        <div className="space-y-2">
+          <Label>Sort Order</Label>
+          <Input
             type="number"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
-            className="w-24 px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-24"
           />
         </div>
-        <label className="flex items-center gap-2 mt-5">
-          <input
-            type="checkbox"
+        <div className="flex items-center gap-2 mt-5">
+          <Checkbox
             checked={isVisible}
-            onChange={(e) => setIsVisible(e.target.checked)}
-            className="h-4 w-4 rounded border-border"
+            onCheckedChange={(checked) => setIsVisible(checked === true)}
           />
-          <span className="text-sm text-foreground/80">Visible</span>
-        </label>
+          <Label>Visible</Label>
+        </div>
       </div>
 
       {errors._form && (
-        <p className="text-sm text-red-600 bg-red-50 p-3 rounded">{errors._form[0]}</p>
+        <p className="text-sm text-destructive bg-destructive/10 p-3 rounded">
+          {errors._form[0]}
+        </p>
       )}
 
       <div className="flex gap-3">
-        <button
+        <Button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
         >
           {saving ? "Saving..." : collection ? "Update Collection" : "Create Collection"}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="outline"
           onClick={() => router.back()}
-          className="px-6 py-2.5 border border-border text-foreground/80 text-sm font-medium rounded-lg hover:bg-muted transition-colors"
         >
           Cancel
-        </button>
+        </Button>
       </div>
     </form>
   );

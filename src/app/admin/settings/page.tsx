@@ -3,6 +3,11 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface Milestone {
   age: string;
@@ -108,94 +113,89 @@ export default function AdminSettingsPage() {
         Site Settings
       </h1>
 
-      <div className="bg-card rounded-xl border p-6 max-w-2xl space-y-6">
-        {fields.map((field) => (
-          <div key={field.key}>
-            <label className="block text-sm font-medium text-foreground/80 mb-1">
-              {field.label}
-            </label>
-            {field.type === "textarea" ? (
-              <textarea
-                value={settings[field.key] || ""}
-                onChange={(e) => updateSetting(field.key, e.target.value)}
-                rows={5}
-                className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            ) : (
-              <input
-                type={field.type}
-                value={settings[field.key] || ""}
-                onChange={(e) => updateSetting(field.key, e.target.value)}
-                className="w-full px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-              />
+      <Card className="max-w-2xl">
+        <CardContent className="pt-6 space-y-6">
+          {fields.map((field) => (
+            <div key={field.key}>
+              <Label className="mb-1">{field.label}</Label>
+              {field.type === "textarea" ? (
+                <Textarea
+                  value={settings[field.key] || ""}
+                  onChange={(e) => updateSetting(field.key, e.target.value)}
+                  rows={5}
+                />
+              ) : (
+                <Input
+                  type={field.type}
+                  value={settings[field.key] || ""}
+                  onChange={(e) => updateSetting(field.key, e.target.value)}
+                />
+              )}
+            </div>
+          ))}
+
+          {/* Milestones Editor */}
+          <div className="border-t pt-6">
+            <Label className="mb-1">Art Journey Milestones</Label>
+            <p className="text-xs text-muted-foreground/70 mb-3">
+              These appear on the About page timeline. Leave empty to show
+              defaults.
+            </p>
+
+            <div className="space-y-2">
+              {milestones.map((milestone, index) => (
+                <div key={index} className="flex gap-2">
+                  <Input
+                    type="text"
+                    value={milestone.age}
+                    onChange={(e) =>
+                      updateMilestone(index, "age", e.target.value)
+                    }
+                    placeholder="Age / Period"
+                    className="w-32"
+                  />
+                  <Input
+                    type="text"
+                    value={milestone.desc}
+                    onChange={(e) =>
+                      updateMilestone(index, "desc", e.target.value)
+                    }
+                    placeholder="Description"
+                    className="flex-1"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeMilestone(index)}
+                    className="text-muted-foreground/70 hover:text-red-600"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+
+            <Button
+              type="button"
+              variant="link"
+              onClick={addMilestone}
+              className="mt-2 px-0"
+            >
+              + Add milestone
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-3 pt-2">
+            <Button onClick={handleSave} disabled={saving}>
+              {saving ? "Saving..." : "Save Settings"}
+            </Button>
+            {saved && (
+              <span className="text-sm text-green-600">Settings saved!</span>
             )}
           </div>
-        ))}
-
-        {/* Milestones Editor */}
-        <div className="border-t pt-6">
-          <label className="block text-sm font-medium text-foreground/80 mb-1">
-            Art Journey Milestones
-          </label>
-          <p className="text-xs text-muted-foreground/70 mb-3">
-            These appear on the About page timeline. Leave empty to show
-            defaults.
-          </p>
-
-          <div className="space-y-2">
-            {milestones.map((milestone, index) => (
-              <div key={index} className="flex gap-2">
-                <input
-                  type="text"
-                  value={milestone.age}
-                  onChange={(e) =>
-                    updateMilestone(index, "age", e.target.value)
-                  }
-                  placeholder="Age / Period"
-                  className="w-32 px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-                <input
-                  type="text"
-                  value={milestone.desc}
-                  onChange={(e) =>
-                    updateMilestone(index, "desc", e.target.value)
-                  }
-                  placeholder="Description"
-                  className="flex-1 px-3 py-2 border border-input rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeMilestone(index)}
-                  className="p-2 text-muted-foreground/70 hover:text-red-600 transition-colors"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={addMilestone}
-            className="text-sm text-primary hover:text-primary/80 mt-2"
-          >
-            + Add milestone
-          </button>
-        </div>
-
-        <div className="flex items-center gap-3 pt-2">
-          <button
-            onClick={handleSave}
-            disabled={saving}
-            className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 disabled:opacity-50 transition-colors"
-          >
-            {saving ? "Saving..." : "Save Settings"}
-          </button>
-          {saved && (
-            <span className="text-sm text-green-600">Settings saved!</span>
-          )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
