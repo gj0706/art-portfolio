@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -14,6 +15,8 @@ import {
   Settings,
   LogOut,
   Palette,
+  Menu,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -32,6 +35,7 @@ const navItems = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   async function handleLogout() {
     const supabase = createClient();
@@ -40,10 +44,14 @@ export function AdminSidebar() {
     router.refresh();
   }
 
-  return (
-    <aside className="w-60 bg-primary text-primary-foreground/70 flex flex-col min-h-screen">
+  const sidebarContent = (
+    <>
       <div className="p-4 border-b border-primary-foreground/20">
-        <Link href="/" className="flex items-center gap-2 text-primary-foreground">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-primary-foreground"
+          onClick={() => setMobileOpen(false)}
+        >
           <Palette className="h-6 w-6" />
           <span className="font-semibold">Anna&apos;s Art Adventure</span>
         </Link>
@@ -58,6 +66,7 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setMobileOpen(false)}
               className={cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
                 isActive
@@ -82,6 +91,50 @@ export function AdminSidebar() {
           Sign out
         </Button>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile header bar */}
+      <div className="fixed top-0 left-0 right-0 z-40 flex items-center gap-3 h-14 px-4 bg-primary text-primary-foreground lg:hidden">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="text-primary-foreground hover:bg-primary-foreground/10"
+          aria-expanded={mobileOpen}
+          aria-label="Toggle sidebar"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
+        <Link href="/admin" className="flex items-center gap-2 text-primary-foreground">
+          <Palette className="h-5 w-5" />
+          <span className="font-semibold text-sm">Admin</span>
+        </Link>
+      </div>
+
+      {/* Backdrop (mobile only) */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "fixed top-0 left-0 z-50 w-60 bg-primary text-primary-foreground/70 flex flex-col h-screen transition-transform duration-200 ease-in-out",
+          // Desktop: always visible
+          "lg:translate-x-0",
+          // Mobile: off-screen by default, slides in when open
+          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        )}
+      >
+        {sidebarContent}
+      </aside>
+    </>
   );
 }
