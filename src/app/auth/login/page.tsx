@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Palette } from "lucide-react";
+import NextImage from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -43,7 +43,7 @@ function LoginForm() {
     <Card className="w-full max-w-sm">
       <CardContent className="p-8">
         <div className="text-center mb-6">
-          <Palette className="h-10 w-10 mx-auto text-foreground mb-2" />
+          <NextImage src="/anna-logo-128.png" alt="Anna's Art Adventure" width={64} height={64} className="rounded-full mx-auto mb-2" />
           <h1 className="text-xl font-semibold text-foreground">Admin Login</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Sign in to manage the portfolio

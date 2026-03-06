@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = [
   { href: "/gallery", label: "Gallery" },
@@ -18,8 +19,15 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="font-serif text-lg text-foreground tracking-tight"
+              className="flex items-center gap-2 font-serif text-lg text-foreground tracking-tight"
             >
+              <Image
+                src="/anna-logo-64.png"
+                alt=""
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
               Anna&apos;s Art Adventure
             </Link>
             <p className="text-sm text-muted-foreground mt-2">

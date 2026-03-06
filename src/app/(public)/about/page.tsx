@@ -88,11 +88,13 @@ export default async function AboutPage() {
               className="w-32 h-32 rounded-full object-cover mx-auto mb-4"
             />
           ) : (
-            <div className="w-32 h-32 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-              <span className="font-serif text-3xl text-muted-foreground/40">
-                {artistName.charAt(0)}
-              </span>
-            </div>
+            <Image
+              src="/anna-avatar.png"
+              alt={artistName}
+              width={128}
+              height={128}
+              className="w-32 h-32 rounded-full object-cover mx-auto mb-4"
+            />
           )}
           <h1 className="font-serif text-3xl font-normal text-foreground mb-2">{artistName}</h1>
           <p className="text-muted-foreground">Drawing my world since age 2</p>

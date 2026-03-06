@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import NextImage from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -25,7 +26,14 @@ export function Navbar() {
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="font-serif text-lg text-foreground tracking-tight">
+          <Link href="/" className="flex items-center gap-2 font-serif text-lg text-foreground tracking-tight">
+            <NextImage
+              src="/anna-logo-64.png"
+              alt=""
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
             Anna&apos;s Art Adventure
           </Link>
 

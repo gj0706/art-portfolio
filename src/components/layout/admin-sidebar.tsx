@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import NextImage from "next/image";
 import {
   LayoutDashboard,
   Image,
@@ -14,7 +15,6 @@ import {
   PenTool,
   Settings,
   LogOut,
-  Palette,
   Menu,
   X,
 } from "lucide-react";
@@ -52,7 +52,7 @@ export function AdminSidebar() {
           className="flex items-center gap-2 text-primary-foreground"
           onClick={() => setMobileOpen(false)}
         >
-          <Palette className="h-6 w-6" />
+          <NextImage src="/anna-logo-64.png" alt="" width={28} height={28} className="rounded-full" />
           <span className="font-semibold">Anna&apos;s Art Adventure</span>
         </Link>
       </div>
@@ -109,7 +109,7 @@ export function AdminSidebar() {
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
         <Link href="/admin" className="flex items-center gap-2 text-primary-foreground">
-          <Palette className="h-5 w-5" />
+          <NextImage src="/anna-logo-64.png" alt="" width={24} height={24} className="rounded-full" />
           <span className="font-semibold text-sm">Admin</span>
         </Link>
       </div>
