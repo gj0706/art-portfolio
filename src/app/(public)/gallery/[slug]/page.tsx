@@ -8,6 +8,7 @@ import { FadeIn } from "@/components/motion/fade-in";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { ImageProtection } from "@/components/ui/image-protection";
 import type { ArtworkWithMedia } from "@/types";
 import type { Metadata } from "next";
 
@@ -84,6 +85,12 @@ export default async function ArtworkDetailPage({
       name: "Anna",
       url: SITE_CONFIG.url,
     },
+    copyrightHolder: {
+      "@type": "Person",
+      name: "Anna",
+      url: SITE_CONFIG.url,
+    },
+    copyrightYear: typedArtwork.year_created || new Date().getFullYear(),
   };
 
   return (
@@ -117,20 +124,25 @@ export default async function ArtworkDetailPage({
               />
             </div>
           ) : (
-            <Image
-              key={media.id}
-              src={media.url}
-              alt={media.alt_text || typedArtwork.title}
-              width={media.width || 0}
-              height={media.height || 0}
-              sizes="(max-width: 896px) 100vw, 896px"
-              className="w-full rounded-2xl"
-              style={!media.width ? { width: "100%", height: "auto" } : undefined}
-              priority={media.is_primary}
-            />
+            <ImageProtection key={media.id} className="rounded-2xl">
+              <Image
+                src={media.url}
+                alt={media.alt_text || typedArtwork.title}
+                width={media.width || 0}
+                height={media.height || 0}
+                sizes="(max-width: 896px) 100vw, 896px"
+                className="w-full"
+                style={!media.width ? { width: "100%", height: "auto" } : undefined}
+                priority={media.is_primary}
+              />
+            </ImageProtection>
           )
         )}
       </div>
+
+      <p className="text-xs text-muted-foreground/50 mt-2 mb-8">
+        &copy; {typedArtwork.year_created || new Date().getFullYear()} Anna&apos;s Art Adventure. All rights reserved. This artwork may not be reproduced without permission.
+      </p>
 
       {/* Info */}
       <FadeIn>

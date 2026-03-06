@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { ImageProtection } from "@/components/ui/image-protection";
 import type { ArtworkWithMedia } from "@/types";
 import { ARTWORK_MEDIUMS } from "@/lib/constants";
 
@@ -27,7 +28,7 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
       )}
     >
       {primaryImage && (
-        <div className="overflow-hidden">
+        <ImageProtection variant="thumbnail">
           <Image
             src={primaryImage.url}
             alt={primaryImage.alt_text || artwork.title}
@@ -37,7 +38,7 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
             className="w-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
             style={!primaryImage.width ? { width: "100%", height: "auto" } : undefined}
           />
-        </div>
+        </ImageProtection>
       )}
       <div className="p-3.5">
         <h3 className="font-serif text-sm text-foreground group-hover:text-accent transition-colors">

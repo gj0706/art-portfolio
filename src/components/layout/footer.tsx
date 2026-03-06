@@ -81,7 +81,7 @@ export function Footer() {
         <div className="mt-10 pt-6 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-muted-foreground/70">
             &copy; {new Date().getFullYear()} Anna&apos;s Art Adventure. All
-            artworks are original creations.
+            artworks are original creations and may not be reproduced without permission.
           </p>
           <p className="text-xs text-muted-foreground/50">Built with love</p>
         </div>

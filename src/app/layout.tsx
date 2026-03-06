@@ -30,6 +30,11 @@ export const metadata: Metadata = {
 		description: "A creative journey through art from age 2 to today.",
 		type: "website",
 	},
+	other: {
+		copyright: "Anna's Art Adventure",
+		rights:
+			"All artwork is copyrighted. No reproduction without permission.",
+	},
 };
 
 export default function RootLayout({
